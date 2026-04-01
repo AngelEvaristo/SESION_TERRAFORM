@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-lastest
+
+    steps:
+      - name: check repository
+        uses: actions/checkout@v4
+
+      - name: setup Terroform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto--approve -var="nombre=archivoprueba"
+
+      - name: validar file
+        run: ls             
+
+  
